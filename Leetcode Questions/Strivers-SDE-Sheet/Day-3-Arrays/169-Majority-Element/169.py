@@ -43,8 +43,8 @@ def majorityBetter1(arr: list[int]) -> int:
             return arr[i]
     
     
-# Better Approach, make use of hash map -> takes O(n*log(n)) time to store an element, and another loop for 
-# searching which takes O(n) time. TC: O(n*logn), SC: O(n) -> maintaing a hash map
+# Better Approach, make use of hash map -> takes O(n) time to store an element, and another loop for 
+# searching which takes O(n) time. TC: O(n), SC: O(n) -> maintaing a hash map
 from collections import Counter
 def majorityBetter2(arr: list[int]) -> int:
     n = len(arr)
