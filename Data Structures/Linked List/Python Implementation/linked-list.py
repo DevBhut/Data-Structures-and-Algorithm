@@ -104,6 +104,7 @@ class LinkedList():
         return 
     
     
+    # This is a O(n) TC function, we can make it a O(1) TC function by making use of a 'len' variable and updating it everytime we perform any update or delete operation
     def get_length(self) -> int:
         len = 0
         temp = self.head
