@@ -10,13 +10,59 @@ Follow Up
 Can you do this in linear time and constant additional space? 
 '''
 
-# Brute Force: maintain a hash map/list/array. TC: O(n), SC: O(n)
-def missingRepeat(arr: list[int]) -> tuple[int, int]:
+
+# Brute Force: run the loop twice, first loop selecting an element, second loop checking whehter that element is repeated again or is missing.
+# TC: O(n**2), SC: O(1) (only using two int variables)
+
+def missingRepeatBrute(arr: list[int]) -> tuple[int, int]:
     n = len(arr)
-    count = [[0, 0]]*(n+1)     # numbers from 1 to n will take index from 1 to n (ignoring the index 0 as 0 is not in the input list)
+    repeat, missing = -1, -1
+    
+    for i in range(1, n+1):             # since numbers in arr are from 1 to n
+        count = 0
+        for j in range(n):
+            if arr[j] == i:
+                count += 1
+        if count == 2:
+            repeat = i
+        elif count == 0:
+            missing = i
+        if repeat != -1 and missing != -1:
+            break
+    
+    return [repeat, missing]
+    
+    
+
+# My Brute Force (Better sol): maintain a hash map/list/array. TC: O(n), SC: O(n)
+def missingRepeatBetter(arr: list[int]) -> tuple[int, int]:
+    n = len(arr)
+    hash = [0] * (n+1)
+    
+    # Update hash
     for i in range(n):
-        count[i][0] += 1
-        count[i][1] = 1
-    count.sort()
+        hash[arr[i]] += 1
+        
+    # Find repeating and missing number, start from 1 to n+1 (as hash includes 0 index as well)
+    repeat, missing = -1, -1
+    for i in range(1, n+1):
+        if hash[i] == 2:
+            repeat = i
+        elif hash[i] == 0:
+            missing = i
+        if repeat != -1 and missing != -1:
+            break
+    
+    return [repeat, missing]
+
+
+
+
+
+
+if __name__ == '__main__':
+    input1 = [3, 1, 2, 3, 5]
+    print(missingRepeatBetter(input1))
+    
     
     
